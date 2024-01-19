@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TrafficComponent } from './traffic.component';
 
 describe('TrafficComponent', () => {
@@ -11,7 +10,9 @@ describe('TrafficComponent', () => {
       declarations: [TrafficComponent]
     })
     .compileComponents();
-    
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(TrafficComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +21,6 @@ describe('TrafficComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Add more test cases specific to your TrafficComponent here
 });
