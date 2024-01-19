@@ -7,12 +7,14 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ButtonModule } from 'primeng/button';
+import { ConstructionComponent } from './construction/construction.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    SidebarComponent
+    SidebarComponent,
+    ConstructionComponent
   ],
   imports: [
     BrowserModule,
