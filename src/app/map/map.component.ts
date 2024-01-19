@@ -21,12 +21,16 @@ export class MapComponent {
   addMarker(event: google.maps.MapMouseEvent) {
     if (event.latLng != null) {
       const newMarkerPosition = event.latLng.toJSON();
-      
+         // Set the desired size for the marker icon
+      const iconSize = { width: 40, height: 40 };
       // Create a new marker options object for each marker
       const newMarkerOptions: google.maps.MarkerOptions = {
         position: newMarkerPosition,
         draggable: false,
-        icon: '../../assets/icons/icons8-construction-100.png' // Set the icon URL here
+        icon: {
+          url: '../../assets/icons/icons8-construction-100.png',
+          scaledSize: new google.maps.Size(iconSize.width, iconSize.height)
+        }
       };
       
       this.markerPositions.push(newMarkerPosition);
