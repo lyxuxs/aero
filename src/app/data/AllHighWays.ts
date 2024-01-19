@@ -4,7 +4,7 @@ interface Road {
   roads: string[];
 }
 
-export const functionGetAllHeyWays = async (): Promise<Road | undefined> => {
+export const functionGetAllHighways = async (): Promise<Road | undefined> => {
   try {
     const response = await axios.get('https://verkehr.autobahn.de/o/autobahn/', {
       headers: {
