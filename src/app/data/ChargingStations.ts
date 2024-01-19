@@ -1,6 +1,6 @@
-// ChargingStations.ts
 import axios from 'axios';
 import { functionGetAllHighways } from './AllHighWays';
+import { ApiURL } from '../util/Api';
 
 interface RoadworksData {
     coordinate: Coordinate;
@@ -40,10 +40,10 @@ export const functionCharging = async (): Promise<RoadworksData[]> => {
         if (heyWaysData && heyWaysData.roads && heyWaysData.roads.length > 0) {
             const chargingStationDataArray: RoadworksData[] = [];
 
-            await Promise.all(heyWaysData.roads.map(async (road: string) => {
-                const encodedRoad = encodeURIComponent(road);
+            // await Promise.all(heyWaysData.roads.map(async (road: string) => {
+            //     const encodedRoad = encodeURIComponent(road);
 
-                const response = await axios.get(`https://verkehr.autobahn.de/o/autobahn/${encodedRoad}/services/electric_charging_station`, {
+                const response = await axios.get(`${ApiURL}A1/services/electric_charging_station`, {
                     headers: {
                         'accept': 'application/json'
                     }
@@ -51,7 +51,7 @@ export const functionCharging = async (): Promise<RoadworksData[]> => {
 
                 const chargingStationData = response.data.electric_charging_station as RoadworksData;
                 chargingStationDataArray.push(chargingStationData);
-            }));
+            // }));
 
             return chargingStationDataArray;
         }

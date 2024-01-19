@@ -2,8 +2,8 @@
             width="100%"
             [center]="center"
             [zoom]="zoom"
-            (mapClick)="addMarker($event)">
+            (mapClick)="addMarker($event, true)"> 
   <map-marker *ngFor="let markerPosition of markerPositions"
               [position]="markerPosition"
-              [options]="markerOptions"></map-marker>
+              [options]="chargingMarkerOptions"></map-marker>
 </google-map>

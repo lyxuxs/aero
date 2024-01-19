@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ApiURL } from "../util/Api";
 
 interface Road {
   roads: string[];
@@ -6,7 +7,7 @@ interface Road {
 
 export const functionGetAllHighways = async (): Promise<Road | undefined> => {
   try {
-    const response = await axios.get('https://verkehr.autobahn.de/o/autobahn/', {
+    const response = await axios.get(ApiURL, {
       headers: {
         'accept': 'application/json'
       }

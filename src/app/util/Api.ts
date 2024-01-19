@@ -1,0 +1,1 @@
+export const ApiURL='https://verkehr.autobahn.de/o/autobahn/';
