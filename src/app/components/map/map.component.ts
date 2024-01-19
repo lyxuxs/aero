@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { functionCharging } from '../data/ChargingStations';
+import { functionCharging } from '../../data/ChargingStations'; 
 
 @Component({
   selector: 'app-map',
