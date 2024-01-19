@@ -8,7 +8,7 @@ import { MapComponent } from './map/map.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ButtonModule } from 'primeng/button';
 import { ConstructionComponent } from './construction/construction.component';
-
+import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { ConstructionComponent } from './construction/construction.component';
     BrowserModule,
     AppRoutingModule,
     GoogleMapsModule,
-    ButtonModule
+    ButtonModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
