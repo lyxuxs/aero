@@ -1,0 +1,9 @@
+<google-map height="100vh"
+            width="100%"
+            [center]="center"
+            [zoom]="zoom"
+            (mapClick)="addMarker($event, true)"> 
+  <map-marker *ngFor="let lorryParkingMarkerPosition of lorryParkingMarkerPositions"
+              [position]="lorryParkingMarkerPosition"
+              [options]="lorryParkingMarkerOptions"></map-marker>
+</google-map>

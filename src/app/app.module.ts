@@ -4,15 +4,25 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { MapComponent } from './components/map/map.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ButtonModule } from 'primeng/button';
+import { TrafficComponent } from './components/traffic/traffic.component';
+import { WebcamComponent } from './components/webcam/webcam.component';
+import { ParkingComponent } from './components/parking/parking.component';
+import { ChargingComponent } from './components/charging/charging.component';
+import { WarningComponent } from './components/warning/warning.component';
+import { ConstructionComponent } from './components/construction/construction.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent,
-    SidebarComponent
+    SidebarComponent,
+    TrafficComponent,
+    WebcamComponent,
+    ParkingComponent,
+    ChargingComponent,
+    WarningComponent,
+    ConstructionComponent
   ],
   imports: [
     BrowserModule,
