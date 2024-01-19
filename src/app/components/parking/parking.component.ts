@@ -1,24 +1,6 @@
 import { Component } from '@angular/core';
-import { functionCharging } from '../../data/ChargingStations';
 import { functionLorryParking } from '../../data/ParkingStations';
 
-interface ChargingStation {
-  extent: string;
-  identifier: string;
-  routeRecommendation: any[];
-  coordinate: { lat: string, long: string };
-  footer: any[];
-  icon: string;
-  isBlocked: string;
-  description: string[];
-  title: string;
-  point: string;
-  display_type: string;
-  lorryParkingFeatureIcons: any[];
-  future: boolean;
-  subtitle: string;
-  startTimestamp: string;
-}
 @Component({
   selector: 'app-parking',
   templateUrl: './parking.component.html',
