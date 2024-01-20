@@ -33,23 +33,23 @@ export class TrafficComponent {
   
   async station( selectedRoad: string) {
     try {
-      const dataManager = new DataManage(`${selectedRoad}/services/parking_lorry`);
+      const dataManager = new DataManage(`${selectedRoad}/services/closure`);
       const dataArray = await dataManager.functionLorryParking();
       this.Stations = dataArray.flat();
       this.MarkerPositions = [];
 
       for (let i = 0; i < this.Stations.length; i++) {
         // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
-        for (let index = 0; index < this.Stations[i].data.parking_lorry.length; index++) {
+        for (let index = 0; index < this.Stations[i].data.closure.length; index++) {
           this.MarkerPositions.push({
-            lat: parseFloat(this.Stations[i].data.parking_lorry[index].coordinate.lat),
-            lng: parseFloat(this.Stations[i].data.parking_lorry[index].coordinate.long)
+            lat: parseFloat(this.Stations[i].data.closure[index].coordinate.lat),
+            lng: parseFloat(this.Stations[i].data.closure[index].coordinate.long)
           });
         }
       }
 
     } catch (error) {
-      console.error('Error fetching lorry parking station data:', error);
+      console.error('Error fetching closure station data:', error);
     }
   }
 
