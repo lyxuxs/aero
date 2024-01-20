@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { functionGetAllHighways } from '../../data/AllHighWays';
 import DataManage from '../../data/DataManage';
-
 
 @Component({
   selector: 'app-charging',
   templateUrl: './charging.component.html',
-  styleUrl: './charging.component.css'
+  styleUrls: ['./charging.component.css']
 })
-export class ChargingComponent {
+export class ChargingComponent implements OnInit {
 
   Stations: any[] = [];
   heyWaysData: any[] = [];
   selectedRoad: string = '';
+  map: google.maps.Map | undefined;
+  infoWindows: google.maps.InfoWindow[] = [];
 
   ngOnInit(): void {
     this.Roades();
+    this.infoWindows = [];
+    this.map = new google.maps.Map(document.getElementById('map')!, {
+      center: this.center,
+      zoom: this.zoom,
+    });
   }
 
   onSelectedRoadChange() {
@@ -32,8 +38,7 @@ export class ChargingComponent {
     }
   }
 
-  
-  async station( selectedRoad: string) {
+  async station(selectedRoad: string) {
     try {
       const dataManager = new DataManage(`${selectedRoad}/services/electric_charging_station`);
       const dataArray = await dataManager.functionLorryParking();
@@ -41,11 +46,29 @@ export class ChargingComponent {
       this.MarkerPositions = [];
 
       for (let i = 0; i < this.Stations.length; i++) {
-        // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
         for (let index = 0; index < this.Stations[i].data.electric_charging_station.length; index++) {
-          this.MarkerPositions.push({
-            lat: parseFloat(this.Stations[i].data.electric_charging_station[index].coordinate.lat),
-            lng: parseFloat(this.Stations[i].data.electric_charging_station[index].coordinate.long)
+          const markerPosition = new google.maps.LatLng(
+            parseFloat(this.Stations[i].data.electric_charging_station[index].coordinate.lat),
+            parseFloat(this.Stations[i].data.electric_charging_station[index].coordinate.long)
+          );
+
+          const marker = new google.maps.Marker({
+            position: markerPosition,
+            map: this.map,
+            icon: this.MarkerOptions.icon
+          });
+
+          this.MarkerPositions.push({ position: markerPosition, marker });
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: `<div>Charging Station Details: ${markerPosition.lat()}, ${markerPosition.lng()}</div>`
+          });
+
+          this.infoWindows.push(infoWindow);
+
+          google.maps.event.addListener(marker, 'click', () => {
+            this.closeAllInfoWindows();
+            infoWindow.open(this.map, marker);
           });
         }
       }
@@ -55,7 +78,11 @@ export class ChargingComponent {
     }
   }
 
-
+  closeAllInfoWindows() {
+    for (const infoWindow of this.infoWindows) {
+      infoWindow.close();
+    }
+  }
 
   center: google.maps.LatLngLiteral = {
     lat: 51.165691,
@@ -73,15 +100,9 @@ export class ChargingComponent {
     },
   };
 
-  MarkerPositions: google.maps.LatLngLiteral[] = [];
+  MarkerPositions: { position: google.maps.LatLng; marker: google.maps.Marker }[] = [];
 
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {
-    if (event.latLng != null) {
-      const position = event.latLng.toJSON();
-      if (isChargingStation) {
-      } else {
-        this.MarkerPositions.push(position);
-      }
-    }
+    // No need for this method if you're using click event listeners on each marker
   }
 }

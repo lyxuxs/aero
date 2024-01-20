@@ -3,14 +3,16 @@
       <option value="">--Select Roads--</option>
       <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
     </select>
-  </div>
    
+  </div>
+  
 <google-map height="100vh"
             width="100%"
             [center]="center"
             [zoom]="zoom"
             (mapClick)="addMarker($event, true)"> 
-  <map-marker *ngFor="let MarkerPosition of MarkerPositions"
-              [position]="MarkerPosition"
-              [options]="MarkerOptions"></map-marker>
+            <map-marker *ngFor="let markerPosition of MarkerPositions" [position]="markerPosition.position" [options]="MarkerOptions">
+            </map-marker>
+
+              
 </google-map>
