@@ -1,9 +1,16 @@
+<div class="dropdown">
+    <select name="Citys" id="" [(ngModel)]="selectedRoad" (ngModelChange)="onSelectedRoadChange()">
+      <option value="">--Select Roads--</option>
+      <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
+    </select>
+  </div>
+   
 <google-map height="100vh"
             width="100%"
             [center]="center"
             [zoom]="zoom"
             (mapClick)="addMarker($event, true)"> 
-  <map-marker *ngFor="let warningMarkerPositions of warningMarkerPositions"
-              [position]="warningMarkerPositions"
-              [options]="warningMarkerOptions"></map-marker>
+  <map-marker *ngFor="let MarkerPosition of MarkerPositions"
+              [position]="MarkerPosition"
+              [options]="MarkerOptions"></map-marker>
 </google-map>

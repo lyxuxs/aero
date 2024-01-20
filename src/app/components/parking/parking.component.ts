@@ -63,12 +63,12 @@ export class ParkingComponent {
   };
   zoom = 8;
 
-  lorryParkingMarkerIconUrl = '../../assets/svg/parking.svg';
+  iconUrl = '../../assets/svg/parking.svg';
 
   MarkerOptions: google.maps.MarkerOptions = {
     draggable: false,
     icon: {
-      url: this.lorryParkingMarkerIconUrl,
+      url: this.iconUrl,
       scaledSize: new google.maps.Size(60, 60)
     },
   };
