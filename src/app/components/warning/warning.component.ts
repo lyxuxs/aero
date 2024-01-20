@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { functionWarning } from '../../data/Warning'; 
+import { functionGetAllHighways } from '../../data/AllHighWays';
+import DataManage from '../../data/DataManage';
 
 @Component({
   selector: 'app-warning',
@@ -7,51 +8,77 @@ import { functionWarning } from '../../data/Warning';
   styleUrl: './warning.component.css'
 })
 export class WarningComponent {
-  warningStations: any[] = [];
+  Stations: any[] = [];
+  heyWaysData: any[] = [];
+  selectedRoad: string = '';
 
   ngOnInit(): void {
-    this.warningStation();
+    this.Roades();
   }
 
- 
-  async warningStation() {
+  onSelectedRoadChange() {
+    this.station(this.selectedRoad);
+  }
+
+  async Roades() {
     try {
-      const result = await functionWarning();
-      this.warningStations = result.flatMap(data => data);
-      console.log("this.result", result);
-      // Initialize markerPositions as an empty array
-      this.warningMarkerPositions = [];
-
-      for (let i = 0; i < this.warningStations.length; i++) {
-        console.log("this.warningStations[i]", this.warningStations[i]);
-
-        this.warningMarkerPositions.push({
-          lat: parseFloat(this.warningStations[i].coordinate.lat),
-          lng: parseFloat(this.warningStations[i].coordinate.long)
-        });
-      }
+      const heyWaysData = await functionGetAllHighways();
+      console.log("functionGetAllHighways", heyWaysData);
+      this.heyWaysData = heyWaysData?.roads || [];
     } catch (error) {
-      console.error('Error fetching charging station data:', error);
+      console.error('Error fetching highways data:', error);
     }
   }
+
+  
+  async station( selectedRoad: string) {
+    try {
+      const dataManager = new DataManage(`${selectedRoad}/services/warning`);
+      const dataArray = await dataManager.functionLorryParking();
+      this.Stations = dataArray.flat();
+      this.MarkerPositions = [];
+
+      for (let i = 0; i < this.Stations.length; i++) {
+        // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
+        for (let index = 0; index < this.Stations[i].data.warning.length; index++) {
+          this.MarkerPositions.push({
+            lat: parseFloat(this.Stations[i].data.warning[index].coordinate.lat),
+            lng: parseFloat(this.Stations[i].data.warning[index].coordinate.long)
+          });
+        }
+      }
+
+    } catch (error) {
+      console.error('Error fetching lorry parking station data:', error);
+    }
+  }
+
+
 
   center: google.maps.LatLngLiteral = {
     lat: 51.165691,
     lng: 10.451526
   };
   zoom = 8;
-  warningMarkerOptions: google.maps.MarkerOptions = {
+
+  iconUrl = '../../assets/svg/warning.svg';
+
+  MarkerOptions: google.maps.MarkerOptions = {
     draggable: false,
-    
+    icon: {
+      url: this.iconUrl,
+      scaledSize: new google.maps.Size(60, 60)
+    },
   };
 
-  warningMarkerPositions: google.maps.LatLngLiteral[] = [];
+  MarkerPositions: google.maps.LatLngLiteral[] = [];
+
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {
     if (event.latLng != null) {
       const position = event.latLng.toJSON();
       if (isChargingStation) {
       } else {
-        this.warningMarkerPositions.push(position);
+        this.MarkerPositions.push(position);
       }
     }
   }

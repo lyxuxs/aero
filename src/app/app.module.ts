@@ -12,6 +12,8 @@ import { ParkingComponent } from './components/parking/parking.component';
 import { ChargingComponent } from './components/charging/charging.component';
 import { WarningComponent } from './components/warning/warning.component';
 import { ConstructionComponent } from './components/construction/construction.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ConstructionComponent } from './components/construction/construction.co
     BrowserModule,
     AppRoutingModule,
     GoogleMapsModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()
