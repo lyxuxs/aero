@@ -29,6 +29,7 @@ interface ParkingLorry {
   }
   
 export const functionLorryParking = async (): Promise<ParkingLorry[]> => {
+    
     try {
         const heyWaysData = await functionGetAllHighways();
 

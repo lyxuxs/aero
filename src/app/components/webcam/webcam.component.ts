@@ -19,7 +19,6 @@ export class WebcamComponent {
       const result = await functionWebCam();
       this.webCamStations = result.flatMap(data => data);
       console.log("this.result", result);
-      // Initialize markerPositions as an empty array
       this.webCamMarkerPositions = [];
 
       for (let i = 0; i < this.webCamStations.length; i++) {
@@ -41,9 +40,14 @@ export class WebcamComponent {
   };
   zoom = 8;
   
+  webCamMarkerIconUrl = '../../assets/svg/webcam.svg';
+
  webCamMarkerOptions: google.maps.MarkerOptions = {
     draggable: false,
-    
+    icon: {
+      url: this.webCamMarkerIconUrl,
+      scaledSize: new google.maps.Size(60,60)
+    },
   };
 
   webCamMarkerPositions: google.maps.LatLngLiteral[] = [];

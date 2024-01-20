@@ -40,9 +40,13 @@ export class WarningComponent {
     lng: 10.451526
   };
   zoom = 8;
+  warningMarkerIconUrl = '../../assets/svg/warning.svg';
   warningMarkerOptions: google.maps.MarkerOptions = {
     draggable: false,
-    
+    icon: {
+      url: this.warningMarkerIconUrl,
+      scaledSize: new google.maps.Size(60,60)
+    },
   };
 
   warningMarkerPositions: google.maps.LatLngLiteral[] = [];
