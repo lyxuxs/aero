@@ -4,7 +4,7 @@
     position: fixed;
     z-index: 2;
     left: 0;
-    background: black;
+    background: #fff;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -21,11 +21,20 @@
     gap: 20px;
 }
 button{
-    background-color: transparent;
-    border: none;
-    width: 50px;
-    height: 50px;
+  background-color: #f1f1f1;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
 }
+
+button:hover{
+  background-color: #1a73e8c4;
+}
+button img{
+  width:25px;
+}
+
 img{
     width: 65%;
 }

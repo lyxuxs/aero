@@ -14,6 +14,16 @@ export class ChargingComponent {
   heyWaysData: any[] = [];
   selectedRoad: string = '';
 
+  onMarkerClick() {
+    console.log('oshan');
+    // Add any additional logic you want to perform when the marker is clicked
+  }
+
+  isPopupVisible: boolean = false;
+  togglePopup() {
+    this.isPopupVisible = !this.isPopupVisible;
+  }
+
   ngOnInit(): void {
     this.Roades();
   }
@@ -32,7 +42,7 @@ export class ChargingComponent {
     }
   }
 
-  
+
   async station( selectedRoad: string) {
     try {
       const dataManager = new DataManage(`${selectedRoad}/services/electric_charging_station`);
@@ -71,6 +81,7 @@ export class ChargingComponent {
       url: this.iconUrl,
       scaledSize: new google.maps.Size(60, 60)
     },
+    clickable : true
   };
 
   MarkerPositions: google.maps.LatLngLiteral[] = [];
