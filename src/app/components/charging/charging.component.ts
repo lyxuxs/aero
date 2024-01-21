@@ -1,7 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { functionGetAllHighways } from '../../data/AllHighWays';
 import DataManage from '../../data/DataManage';
 
+interface ChargingStation {
+  extent: string;
+  identifier: string;
+  routeRecommendation: any[];
+  coordinate: {
+    lat: string;
+    long: string;
+  };
+  footer: any[];
+  icon: string;
+  isBlocked: string;
+  description: string[];
+  title: string;
+  point: string;
+  display_type: string;
+  lorryParkingFeatureIcons: any[];
+  future: boolean;
+  subtitle: string;
+}
 
 @Component({
   selector: 'app-charging',
@@ -14,14 +33,17 @@ export class ChargingComponent {
   heyWaysData: any[] = [];
   selectedRoad: string = '';
 
-  onMarkerClick() {
-    console.log('oshan');
-    // Add any additional logic you want to perform when the marker is clicked
-  }
-
   isPopupVisible: boolean = false;
-  togglePopup() {
+  togglePopup(markerPosition: google.maps.LatLngLiteral) {
     this.isPopupVisible = !this.isPopupVisible;
+    for (let i = 0; i < this.Stations.length; i++) {
+      // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
+      for (let index = 0; index < this.Stations[i].data.electric_charging_station.length; index++) {
+        if(this.Stations[i].data.electric_charging_station[index].coordinate.lat == markerPosition.lat && this.Stations[i].data.electric_charging_station[index].coordinate.long == markerPosition.lng){
+          console.log(this.Stations[i].data.electric_charging_station[index]);
+        }
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -42,7 +64,6 @@ export class ChargingComponent {
     }
   }
 
-
   async station( selectedRoad: string) {
     try {
       const dataManager = new DataManage(`${selectedRoad}/services/electric_charging_station`);
@@ -59,13 +80,10 @@ export class ChargingComponent {
           });
         }
       }
-
     } catch (error) {
       console.error('Error fetching lorry parking station data:', error);
     }
   }
-
-
 
   center: google.maps.LatLngLiteral = {
     lat: 51.165691,
@@ -74,18 +92,15 @@ export class ChargingComponent {
   zoom = 8;
 
   iconUrl = '../../assets/svg/electric.svg';
-
   MarkerOptions: google.maps.MarkerOptions = {
     draggable: false,
     icon: {
       url: this.iconUrl,
       scaledSize: new google.maps.Size(60, 60)
     },
-    clickable : true
-  };
-
+  }
+  
   MarkerPositions: google.maps.LatLngLiteral[] = [];
-
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {
     if (event.latLng != null) {
       const position = event.latLng.toJSON();
