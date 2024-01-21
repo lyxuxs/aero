@@ -3,14 +3,18 @@
       <option value="">--Select Roads--</option>
       <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
     </select>
-  </div>
-   
+</div>
+
+
 <google-map height="100vh"
             width="100%"
             [center]="center"
             [zoom]="zoom"
-            (mapClick)="addMarker($event, true)"> 
+            (mapClick)="addMarker($event, true)">
   <map-marker *ngFor="let MarkerPosition of MarkerPositions"
               [position]="MarkerPosition"
-              [options]="MarkerOptions"></map-marker>
+              [options]="MarkerOptions"
+              (mapClick)="togglePopup(MarkerPosition)"
+              ></map-marker>
 </google-map>
+<app-popup [isVisible]="isPopupVisible"></app-popup>

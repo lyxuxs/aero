@@ -31,7 +31,6 @@ export class ConstructionComponent {
     }
   }
 
-  
   async station( selectedRoad: string) {
     try {
       const dataManager = new DataManage(`${selectedRoad}/services/roadworks`);
@@ -47,15 +46,11 @@ export class ConstructionComponent {
             lng: parseFloat(this.Stations[i].data.roadworks[index].coordinate.long)
           });
         }
-        
       }
-
     } catch (error) {
       console.error('Error fetching lorry parking station data:', error);
     }
   }
-
-
 
   center: google.maps.LatLngLiteral = {
     lat: 51.165691,
@@ -73,6 +68,8 @@ export class ConstructionComponent {
     },
   };
 
+ 
+  
   MarkerPositions: google.maps.LatLngLiteral[] = [];
 
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {

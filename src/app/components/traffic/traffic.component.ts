@@ -71,13 +71,28 @@ export class TrafficComponent {
 
   MarkerPositions: google.maps.LatLngLiteral[] = [];
 
+  // addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {
+  //   if (event.latLng != null) {
+  //     const position = event.latLng.toJSON();
+  //     if (isChargingStation) {
+  //     } else {
+  //       this.MarkerPositions.push(position);
+  //     }
+  //   }
+  // }
+
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {
     if (event.latLng != null) {
       const position = event.latLng.toJSON();
       if (isChargingStation) {
+        // Handle charging station logic if needed
+        console.log(position);
+        
       } else {
         this.MarkerPositions.push(position);
+        console.log('Selected Location:', position);
       }
     }
   }
+  
 }
