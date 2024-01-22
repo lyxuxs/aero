@@ -10,7 +10,7 @@ export default class DataManage {
 
     functionLorryParking = async (): Promise<any[]> => {
         try {
-            const dataArray: any[] = [];
+            const dataArray: any[] = [];            
             const response = await axios.get(`${ApiURL}${this.url}`, {
                 headers: {
                     'accept': 'application/json'

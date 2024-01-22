@@ -12,6 +12,7 @@ export class ChargingComponent {
   Stations: any[] = [];
   heyWaysData: any[] = [];
   selectedRoad: string = '';
+  selectedToggleData: string = '';
 
 
   @Output() sendDataToParent = new EventEmitter<string>();
@@ -32,15 +33,15 @@ export class ChargingComponent {
           this.Stations[i].data.electric_charging_station[index].coordinate
             .long == markerPosition.lng
         ) {
-        const selectedRoad = this.Stations[i].data.electric_charging_station[index].identifier;
-        this.sendDataToParent.emit(`/details/electric_charging_station/${selectedRoad}`);
-        break; 
+          this.selectedToggleData =`details/electric_charging_station/${this.Stations[i].data.electric_charging_station[index].identifier}`;
+          this.sendDataToParent.emit(`details/electric_charging_station/${this.selectedToggleData}`);
+          break;
         }
       }
     }
   }
 
-  
+
 
   ngOnInit(): void {
     this.Roades();
@@ -61,7 +62,7 @@ export class ChargingComponent {
   }
 
 
-  async station( selectedRoad: string) {
+  async station(selectedRoad: string) {
     try {
       const dataManager = new DataManage(
         `${selectedRoad}/services/electric_charging_station`
@@ -109,7 +110,7 @@ export class ChargingComponent {
     },
 
   }
-  
+
   MarkerPositions: google.maps.LatLngLiteral[] = [];
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {
     if (event.latLng != null) {

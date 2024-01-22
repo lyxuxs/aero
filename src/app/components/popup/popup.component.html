@@ -7,7 +7,32 @@
       </button>
     </div>
     <div class="popup-content">
-      <h3>{{selectedRoad}}</h3>
+      <div *ngFor="let station of Stations">
+        <h3>{{ station.data.title }}</h3>
+        <p>{{ station.data.subtitle }}</p>
+    
+        <!-- Additional details if needed -->
+        <p>Extent: {{ station.data.extent }}</p>
+        <p>Identifier: {{ station.data.identifier }}</p>
+        
+        <!-- You can include more details as needed -->
+    
+        <!-- Example: Displaying the charging points -->
+        <div *ngFor="let chargingPoint of station.data.description">
+          <p>{{ chargingPoint }}</p>
+        </div>
+    
+        <!-- Example: Displaying the coordinates -->
+        <p>Latitude: {{ station.data.coordinate.lat }}</p>
+        <p>Longitude: {{ station.data.coordinate.long }}</p>
+    
+        <!-- Example: Displaying the icon -->
+        <p>Icon: {{ station.data.icon }}</p>
+    
+        <!-- Example: Displaying the status -->
+        <p>Status: {{ station.status }}</p>
+      </div>
     </div>
+    
   </div>
 </div>
