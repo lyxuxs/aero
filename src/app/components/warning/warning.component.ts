@@ -95,7 +95,7 @@ export class WarningComponent {
     draggable: false,
     icon: {
       url: this.iconUrl,
-      scaledSize: new google.maps.Size(60, 60)
+      scaledSize: new google.maps.Size(35, 35)
     },
   };
 

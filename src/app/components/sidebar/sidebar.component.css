@@ -7,10 +7,11 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
+    gap: 20px;
 }
 .sider-header{
     display: flex;
@@ -38,3 +39,7 @@ button:hover{
   background-color: #1a73e8e5;
   color: #fff;
 }
+/* button.active {
+  background-color: #197e39; 
+  color: #fff; 
+} */

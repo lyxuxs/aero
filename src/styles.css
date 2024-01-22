@@ -52,3 +52,9 @@
   max-height: 80vh;
   overflow-y: scroll;
 }
+
+
+/* hide fullscreen btn */
+button.gm-control-active.gm-fullscreen-control {
+  display: none;
+}
