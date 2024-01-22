@@ -17,13 +17,10 @@ export class ChargingComponent {
   @Output() sendDataToParent = new EventEmitter<string>();
 
   isPopupVisible: boolean = false;
-  handleDataFromCharging: any;
 
   togglePopup(markerPosition: google.maps.LatLngLiteral) {
     this.isPopupVisible = !this.isPopupVisible;
     for (let i = 0; i < this.Stations.length; i++) {
-      // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
-
       for (
         let index = 0;
         index < this.Stations[i].data.electric_charging_station.length;
@@ -35,13 +32,15 @@ export class ChargingComponent {
           this.Stations[i].data.electric_charging_station[index].coordinate
             .long == markerPosition.lng
         ) {
-          this.sendDataToParent.emit(
-            `/details/electric_charging_station/${this.Stations[i].data.electric_charging_station[index].identifier}`
-          );
+        const selectedRoad = this.Stations[i].data.electric_charging_station[index].identifier;
+        this.sendDataToParent.emit(`/details/electric_charging_station/${selectedRoad}`);
+        break; 
         }
       }
     }
   }
+
+  
 
   ngOnInit(): void {
     this.Roades();

@@ -18,4 +18,4 @@
               (mapClick)="togglePopup(MarkerPosition)"
               ></map-marker>
 </google-map>
-<app-popup [isVisible]="isPopupVisible" (sendDataToParent)="handleDataFromCharging($event)"></app-popup>
+<app-popup [isVisible]="isPopupVisible" [selectedRoad]="selectedRoad"></app-popup>

@@ -8,21 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class PopupComponent {
   @Input() isVisible: boolean = false;
-
-  message: string = '';
-  receiveMessage($event: string) {
-    this.message = $event
-    console.log(this.message);
-    
-    this.isVisible = true
-  }
-  popupVisible: boolean = false;
-  dataFromCharging: string = '';
-  handleDataFromCharging(data: string) {
-    
-    this.dataFromCharging = data;
-    this.popupVisible = true;
-  }
+  @Input() selectedRoad: string = '';
+  
   closePopup() {
     this.isVisible = false;
   }
