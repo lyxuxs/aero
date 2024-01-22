@@ -8,6 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class PopupComponent {
   @Input() isVisible: boolean = false;
+  receivedData: string = '';
+
+  receiveDataFromChild(data: string) {
+    this.receivedData = data;
+    console.log(data);
+  }
 
   closePopup() {
     this.isVisible = false;

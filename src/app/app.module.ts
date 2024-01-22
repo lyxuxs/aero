@@ -34,8 +34,7 @@ import { PopupComponent } from './components/popup/popup.component';
     GoogleMapsModule,
     ButtonModule,
     DropdownModule,
-    FormsModule,
-    ChargingComponent
+    FormsModule
   ],
   providers: [
     provideClientHydration()

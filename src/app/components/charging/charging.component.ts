@@ -1,26 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { functionGetAllHighways } from '../../data/AllHighWays';
 import DataManage from '../../data/DataManage';
 
-interface ChargingStation {
-  extent: string;
-  identifier: string;
-  routeRecommendation: any[];
-  coordinate: {
-    lat: string;
-    long: string;
-  };
-  footer: any[];
-  icon: string;
-  isBlocked: string;
-  description: string[];
-  title: string;
-  point: string;
-  display_type: string;
-  lorryParkingFeatureIcons: any[];
-  future: boolean;
-  subtitle: string;
-}
+
 
 @Component({
   selector: 'app-charging',
@@ -32,6 +14,7 @@ export class ChargingComponent {
   Stations: any[] = [];
   heyWaysData: any[] = [];
   selectedRoad: string = '';
+  @Output() dataToParent = new EventEmitter<string>();
 
   isPopupVisible: boolean = false;
   togglePopup(markerPosition: google.maps.LatLngLiteral) {
@@ -40,7 +23,7 @@ export class ChargingComponent {
       // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
       for (let index = 0; index < this.Stations[i].data.electric_charging_station.length; index++) {
         if(this.Stations[i].data.electric_charging_station[index].coordinate.lat == markerPosition.lat && this.Stations[i].data.electric_charging_station[index].coordinate.long == markerPosition.lng){
-          console.log(this.Stations[i].data.electric_charging_station[index]);
+          this.dataToParent.emit(`${this.Stations[i].data.electric_charging_station[index]}`);
         }
       }
     }
