@@ -1,9 +1,10 @@
 <div class="dropdown">
-    <select name="Citys" id="" [(ngModel)]="selectedRoad" (ngModelChange)="onSelectedRoadChange()">
-      <option value="">--Select Roads--</option>
-      <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
-    </select>
+  <select name="Citys" id="" [(ngModel)]="selectedRoad" (ngModelChange)="onSelectedRoadChange()">
+    <option value="">--Select Roads--</option>
+    <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
+  </select>
 </div>
+
 
 
 <google-map height="100vh"
@@ -17,4 +18,4 @@
               (mapClick)="togglePopup(MarkerPosition)"
               ></map-marker>
 </google-map>
-<app-popup [isVisible]="isPopupVisible"></app-popup>
+<app-popup [isVisible]="isPopupVisible" [selectedToggleData]="selectedToggleData"></app-popup>
