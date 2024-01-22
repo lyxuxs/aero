@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { functionGetAllHighways } from '../../data/AllHighWays';
 import DataManage from '../../data/DataManage';
 
+
 @Component({
   selector: 'app-charging',
   templateUrl: './charging.component.html',
@@ -11,9 +12,12 @@ export class ChargingComponent {
   Stations: any[] = [];
   heyWaysData: any[] = [];
   selectedRoad: string = '';
-  isPopupVisible: boolean = false;
+  selectedToggleData: string = '';
+
 
   @Output() sendDataToParent = new EventEmitter<string>();
+
+  isPopupVisible: boolean = false;
 
   togglePopup(markerPosition: google.maps.LatLngLiteral) {
     this.isPopupVisible = !this.isPopupVisible;
@@ -29,11 +33,8 @@ export class ChargingComponent {
           this.Stations[i].data.electric_charging_station[index].coordinate
             .long == markerPosition.lng
         ) {
-          const selectedRoad =
-            this.Stations[i].data.electric_charging_station[index].identifier;
-          this.sendDataToParent.emit(
-            `/details/electric_charging_station/${selectedRoad}`
-          );
+          this.selectedToggleData =`details/electric_charging_station/${this.Stations[i].data.electric_charging_station[index].identifier}`;
+          this.sendDataToParent.emit(`details/electric_charging_station/${this.selectedToggleData}`);
           break;
         }
       }
@@ -44,9 +45,8 @@ export class ChargingComponent {
     this.Roades();
   }
 
-  onSelectedRoadChange(drp: string) {
-    this.selectedRoad = drp;
-    this.station(drp);
+  onSelectedRoadChange() {
+    this.station(this.selectedRoad);
   }
 
   async Roades() {
@@ -59,6 +59,7 @@ export class ChargingComponent {
     }
   }
 
+
   async station(selectedRoad: string) {
     try {
       const dataManager = new DataManage(
@@ -69,6 +70,7 @@ export class ChargingComponent {
       this.MarkerPositions = [];
 
       for (let i = 0; i < this.Stations.length; i++) {
+        // console.log("this.LorryParkingStations[i]", this.LorryParkingStations[i].data.parking_lorry);
         for (
           let index = 0;
           index < this.Stations[i].data.electric_charging_station.length;
@@ -104,7 +106,7 @@ export class ChargingComponent {
       url: this.iconUrl,
       scaledSize: new google.maps.Size(60, 60),
     },
-  };
+  }
 
   MarkerPositions: google.maps.LatLngLiteral[] = [];
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {

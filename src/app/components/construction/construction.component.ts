@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { functionGetAllHighways } from '../../data/AllHighWays';
 import DataManage from '../../data/DataManage';
 
@@ -8,10 +8,37 @@ import DataManage from '../../data/DataManage';
   styleUrl: './construction.component.css'
 })
 export class ConstructionComponent {
-
   Stations: any[] = [];
   heyWaysData: any[] = [];
   selectedRoad: string = '';
+  selectedToggleData: string = '';
+
+
+  @Output() sendDataToParent = new EventEmitter<string>();
+
+  isPopupVisible: boolean = false;
+
+  togglePopup(markerPosition: google.maps.LatLngLiteral) {
+    this.isPopupVisible = !this.isPopupVisible;
+    for (let i = 0; i < this.Stations.length; i++) {
+      for (
+        let index = 0;
+        index < this.Stations[i].data.roadworks.length;
+        index++
+      ) {
+        if (
+          this.Stations[i].data.roadworks[index].coordinate
+            .lat == markerPosition.lat &&
+          this.Stations[i].data.roadworks[index].coordinate
+            .long == markerPosition.lng
+        ) {
+          this.selectedToggleData =`details/roadworks/${this.Stations[i].data.roadworks[index].identifier}`;
+          this.sendDataToParent.emit(`details/roadworks/${this.selectedToggleData}`);
+          break;
+        }
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.Roades();
@@ -68,8 +95,6 @@ export class ConstructionComponent {
     },
   };
 
- 
-  
   MarkerPositions: google.maps.LatLngLiteral[] = [];
 
   addMarker(event: google.maps.MapMouseEvent, isChargingStation: boolean) {

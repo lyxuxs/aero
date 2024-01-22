@@ -1,20 +1,8 @@
-<!-- <div class="dropdown">
+<div class="dropdown">
   <select name="Citys" id="" [(ngModel)]="selectedRoad" (ngModelChange)="onSelectedRoadChange()">
-    <option value="">Select Roads </option>
+    <option value="">--Select Roads--</option>
     <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
   </select>
-</div> -->
-
-<div class="dropdown">
-  <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    {{ selectedRoad ? selectedRoad : 'Select Roads' }}
-    <!-- <i class="bi bi-signpost-split"></i> -->
-  </button>
-  <ul class="dropdown-menu">
-    <li *ngFor="let drp of heyWaysData">
-      <a class="dropdown-item" (click)="onSelectedRoadChange(drp)">{{ drp }}</a>
-    </li>
-  </ul>
 </div>
 
 

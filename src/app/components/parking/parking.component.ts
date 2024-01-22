@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { functionGetAllHighways } from '../../data/AllHighWays';
 import DataManage from '../../data/DataManage';
 
@@ -9,11 +9,37 @@ import DataManage from '../../data/DataManage';
 })
 
 export class ParkingComponent {
-
   Stations: any[] = [];
   heyWaysData: any[] = [];
   selectedRoad: string = '';
+  selectedToggleData: string = '';
 
+
+  @Output() sendDataToParent = new EventEmitter<string>();
+
+  isPopupVisible: boolean = false;
+
+  togglePopup(markerPosition: google.maps.LatLngLiteral) {
+    this.isPopupVisible = !this.isPopupVisible;
+    for (let i = 0; i < this.Stations.length; i++) {
+      for (
+        let index = 0;
+        index < this.Stations[i].data.parking_lorry.length;
+        index++
+      ) {
+        if (
+          this.Stations[i].data.parking_lorry[index].coordinate
+            .lat == markerPosition.lat &&
+          this.Stations[i].data.parking_lorry[index].coordinate
+            .long == markerPosition.lng
+        ) {
+          this.selectedToggleData =`details/parking_lorry/${this.Stations[i].data.parking_lorry[index].identifier}`;
+          this.sendDataToParent.emit(`details/parking_lorry/${this.selectedToggleData}`);
+          break;
+        }
+      }
+    }
+  }
   ngOnInit(): void {
     this.Roades();
   }

@@ -12,5 +12,8 @@
             (mapClick)="addMarker($event, true)"> 
   <map-marker *ngFor="let MarkerPosition of MarkerPositions"
               [position]="MarkerPosition"
-              [options]="MarkerOptions"></map-marker>
+              [options]="MarkerOptions"
+              (mapClick)="togglePopup(MarkerPosition)"
+              ></map-marker>
 </google-map>
+<app-popup [isVisible]="isPopupVisible" [selectedToggleData]="selectedToggleData"></app-popup>
