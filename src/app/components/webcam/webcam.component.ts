@@ -44,8 +44,9 @@ export class WebcamComponent {
     this.Roades();
   }
 
-  onSelectedRoadChange() {
-    this.station(this.selectedRoad);
+  onSelectedRoadChange(drp : string) {
+    this.selectedRoad = drp;
+    this.station(drp);
   }
 
   async Roades() {

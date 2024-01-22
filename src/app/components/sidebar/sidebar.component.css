@@ -31,13 +31,10 @@ button{
   width: 50px;
   height: 50px;
   border-radius: 5px;
+  font-size: 25px;
+  color: #545050;
 }
 button:hover{
-  background-color: #1a73e891;
-}
-button img{
-  width:25px;
-}
-img{
-    width: 65%;
+  background-color: #1a73e8e5;
+  color: #fff;
 }
