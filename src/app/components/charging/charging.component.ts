@@ -41,8 +41,6 @@ export class ChargingComponent {
     }
   }
 
-
-
   ngOnInit(): void {
     this.Roades();
   }
@@ -108,7 +106,6 @@ export class ChargingComponent {
       url: this.iconUrl,
       scaledSize: new google.maps.Size(60, 60),
     },
-
   }
 
   MarkerPositions: google.maps.LatLngLiteral[] = [];
