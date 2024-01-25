@@ -1,0 +1,36 @@
+<div class="sider">
+  <div class="table_warp">
+      <table>
+          <tbody>
+              <tr>
+                  <th>Property</th>
+                  <th>Value</th>
+              </tr>
+              <tr *ngFor="let station of Stations">
+                  <td>Identifier</td>
+                  <td>{{ station.data.identifier }}</td>
+              </tr>
+              <tr *ngFor="let station of Stations">
+                  <td>Start Time</td>
+                  <td>{{ station.startTimestamp | date:'dd.MM.yyyy HH:mm' }}</td>
+              </tr>
+              <tr *ngFor="let station of Stations">
+                  <td>Details</td>
+                  <td>{{ station.description[4] }}</td>
+              </tr>
+              <tr *ngFor="let station of Stations">
+                  <td>Coordinates of the Incident</td>
+                  <td>Latitude: {{ station.data.coordinate.lat }}, Longitude: {{ station.data.coordinate.long }}</td>
+              </tr>
+              <tr *ngFor="let station of Stations">
+                  <td>Icon</td>
+                  <td>{{ station.data.icon }}</td>
+              </tr>
+              <tr *ngFor="let station of Stations">
+                  <td>Status</td>
+                  <td>{{ station.isBlocked === 'true' ? 'Blocked' : 'Not Blocked' }}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>

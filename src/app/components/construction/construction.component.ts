@@ -44,8 +44,9 @@ export class ConstructionComponent {
     this.Roades();
   }
 
-  onSelectedRoadChange() {
-    this.station(this.selectedRoad);
+  onSelectedRoadChange(drp : string) {
+    this.selectedRoad = drp;
+    this.station(drp);
   }
 
   async Roades() {
@@ -85,13 +86,13 @@ export class ConstructionComponent {
   };
   zoom = 8;
 
-  iconUrl = '../../assets/svg/parking.svg';
+  iconUrl = '../../assets/svg/constraction.svg';
 
   MarkerOptions: google.maps.MarkerOptions = {
     draggable: false,
     icon: {
       url: this.iconUrl,
-      scaledSize: new google.maps.Size(60, 60)
+      scaledSize: new google.maps.Size(35, 35)
     },
   };
 

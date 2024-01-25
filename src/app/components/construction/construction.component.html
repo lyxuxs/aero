@@ -1,19 +1,31 @@
-<div class="dropdown">
-    <select name="Citys" id="" [(ngModel)]="selectedRoad" (ngModelChange)="onSelectedRoadChange()">
-      <option value="">--Select Roads--</option>
-      <option *ngFor="let drp of heyWaysData" [value]="drp">{{ drp }}</option>
-    </select>
+<div class="layout">
+  <div class="map">
+    <div class="dropdown">
+      <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="info">
+           <i class="bi bi-sign-turn-slight-right"></i>
+        {{ selectedRoad ? selectedRoad : 'Select Roads' }}
+        </div>
+       
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let drp of heyWaysData">
+          <a class="dropdown-item" (click)="onSelectedRoadChange(drp)">{{ drp }}</a>
+        </li>
+      </ul>
+    </div>
+    <google-map height="100%"
+                width="100%"
+                [center]="center"
+                [zoom]="zoom"
+                (mapClick)="addMarker($event, true)">
+      <map-marker *ngFor="let MarkerPosition of MarkerPositions"
+                  [position]="MarkerPosition"
+                  [options]="MarkerOptions"
+                  (mapClick)="togglePopup(MarkerPosition)"
+                  ></map-marker>
+    </google-map>
   </div>
-   
-<google-map height="100vh"
-            width="100%"
-            [center]="center"
-            [zoom]="zoom"
-            (mapClick)="addMarker($event, true)"> 
-  <map-marker *ngFor="let MarkerPosition of MarkerPositions"
-              [position]="MarkerPosition"
-              [options]="MarkerOptions"
-              (mapClick)="togglePopup(MarkerPosition)"
-              ></map-marker>
-</google-map>
+  <app-mapsider [isVisible]="isPopupVisible" [selectedToggleData]="selectedToggleData"></app-mapsider>
+</div>
 <app-popup [isVisible]="isPopupVisible" [selectedToggleData]="selectedToggleData"></app-popup>

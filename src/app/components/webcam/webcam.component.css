@@ -1,0 +1,28 @@
+app-mapsider {
+    height: 100%;
+    width: 100%;
+}
+.map {
+    height: 100%;
+    width: 100%;
+}
+
+.layout {
+    height: 100vh;
+    display:flex;
+    flex-direction:row ;
+ }
+
+@media (min-width: 768px) {
+    .layout {
+      flex-direction: row;
+    }
+  }
+  
+  
+  @media (max-width: 767px) {
+    .layout {
+      flex-direction: column;
+    }
+  }
+
