@@ -15,6 +15,7 @@ import { ConstructionComponent } from './components/construction/construction.co
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './components/popup/popup.component';
+import { MapsiderComponent } from './components/mapsider/mapsider.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PopupComponent } from './components/popup/popup.component';
     ChargingComponent,
     WarningComponent,
     ConstructionComponent,
-    PopupComponent
+    PopupComponent,
+    MapsiderComponent
   ],
   imports: [
     BrowserModule,

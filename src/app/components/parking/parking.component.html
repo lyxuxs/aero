@@ -1,10 +1,10 @@
 <div class="dropdown">
   <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
     <div class="info">
-       <i class="bi bi-sign-turn-slight-right"></i>
-    {{ selectedRoad ? selectedRoad : 'Select Roads' }}
+      <i class="bi bi-sign-turn-slight-right"></i>
+      {{ selectedRoad ? selectedRoad : 'Select Roads' }}
     </div>
-   
+
   </button>
   <ul class="dropdown-menu">
     <li *ngFor="let drp of heyWaysData">
@@ -13,7 +13,7 @@
   </ul>
 </div>
 
-<google-map height="100vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="addMarker($event, true)">
+<google-map height="100%" width="100%" [center]="center" [zoom]="zoom" (mapClick)="addMarker($event, true)">
   <map-marker *ngFor="let MarkerPosition of MarkerPositions" [position]="MarkerPosition" [options]="MarkerOptions"
     (mapClick)="togglePopup(MarkerPosition)"></map-marker>
 </google-map>
