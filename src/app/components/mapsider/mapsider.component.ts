@@ -18,10 +18,6 @@ export class MapsiderComponent  implements OnChanges {
     }
   }
 
-  closePopup() {
-    this.isVisible = false;
-  }
-
   async station() {
     try {
       console.log("working...");
